@@ -1,4 +1,5 @@
 import {ExpressionKind, ParamType, TypeKind} from "../reflection/index";
+import {encodeB64} from "../primitives/buffer";
 import type {$expr_WithParams} from "./params";
 
 function jsonStringify(type: ParamType, val: any): string {
@@ -57,7 +58,7 @@ function jsonStringify(type: ParamType, val: any): string {
       case "std::json":
         return JSON.stringify(val);
       case "std::bytes":
-        return `"${val.toString("base64")}"`;
+        return `"${encodeB64(val)}"`;
       case "cfg::memory":
         return `"${val.toString()}"`;
       default:

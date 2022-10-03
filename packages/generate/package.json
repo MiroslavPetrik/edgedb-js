@@ -28,9 +28,7 @@
     "test:v1": "tsx test/testQBv1.ts",
     "setup:v1": "edgedb project init --no-migrations && edgedb migrate --to-revision m135rscrsthtlntxhacevxtvytgwf2vjyqfwvnwod5jihwpzp2zgyq"
   },
-  "bin": {
-    "generate": "dist/cli.js"
-  },
+  "bin": "dist/cli.js",
   "peerDependencies": {
     "edgedb": "^0.23.0"
   },
@@ -38,7 +36,9 @@
     "conditional-type-checks": "^1.0.5",
     "edgedb": "~0.23.0",
     "esbuild": "^0.15.7",
+    "jest": "*",
     "superjson": "^1.7.5",
+    "ts-jest": "*",
     "typescript": "~4.8"
   },
   "dependencies": {

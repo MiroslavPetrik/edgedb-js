@@ -11,7 +11,7 @@ import {TupleCodec} from "edgedb/dist/codecs/tuple";
 import {Cardinality, OutputFormat} from "edgedb/dist/ifaces";
 import {Options, Session} from "edgedb/dist/options";
 import type {Client} from "edgedb";
-import type {ClientPool} from "edgedb/dist/client";
+import type {BaseClientPool} from "edgedb/dist/baseClient";
 import {prettyPrintError} from "./prettyPrint";
 
 export type QueryType = {
@@ -26,7 +26,7 @@ export async function generateQueryType(
   query: string
 ): Promise<QueryType> {
   let parseResult: ParseResult;
-  const pool: ClientPool = (client as any).pool;
+  const pool: BaseClientPool = (client as any).pool;
 
   const holder = await pool.acquireHolder(Options.defaults());
   try {

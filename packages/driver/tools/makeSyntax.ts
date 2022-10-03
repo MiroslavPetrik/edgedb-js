@@ -19,6 +19,7 @@ const distSyntax = path.join(__dirname, "..", "dist", "syntax");
 const esmSyntax = path.join(__dirname, "..", "dist", "__esm", "syntax");
 
 const reReflection = /"\.\.\/reflection([a-zA-Z0-9\_\/]*)\.?(.*)"/g;
+const rePrimitives = /"\.\.\/primitives([a-zA-Z0-9\_\/]*)\.?(.*)"/g;
 const reGenerated = /"@generated\/(.*)"/g;
 const reRelativeImports = /"(\.?\.\/.+)"/g;
 
@@ -61,6 +62,7 @@ async function run() {
     contentTx: content =>
       content
         .replace(reReflection, `"edgedb/dist/reflection$1"`)
+        .replace(rePrimitives, `"edgedb/dist/primitives$1"`)
         .replace(reGenerated, `"../$1"`)
   });
 
@@ -73,6 +75,7 @@ async function run() {
       contentTx: content =>
         content
           .replace(reReflection, `"edgedb/dist/reflection$1.js"`)
+          .replace(rePrimitives, `"edgedb/dist/primitives$1.js"`)
           .replace(reGenerated, `"../$1"`)
     })),
     ...dtsFiles
@@ -88,6 +91,7 @@ async function run() {
       contentTx: content =>
         content
           .replace(reReflection, `"edgedb/dist/reflection$1.js"`)
+          .replace(rePrimitives, `"edgedb/dist/primitives$1.js"`)
           .replace(reGenerated, `"../$1"`)
           .replace(reRelativeImports, `"$1.mjs"`)
     })),
@@ -103,6 +107,7 @@ async function run() {
     contentTx: content =>
       content
         .replace(reReflection, `"edgedb/dist/reflection$1.js"`)
+        .replace(rePrimitives, `"edgedb/dist/primitives$1.js"`)
         .replace(reGenerated, `"../$1"`)
         .replace(reRelativeImports, `"$1.mjs"`)
   });
@@ -119,6 +124,10 @@ async function run() {
         .replace(
           /"\.\.\/reflection([a-zA-Z0-9\.\_\/]*)"/g,
           `"edgedb/_src/reflection$1.ts"`
+        )
+        .replace(
+          /"\.\.\/primitives([a-zA-Z0-9\.\_\/]*)"/g,
+          `"edgedb/_src/primitives$1.ts"`
         )
         .replace(/"@generated\/(.*)"/g, `"../$1"`)
         .replace(reRelativeImports, `"$1.ts"`);

@@ -32,7 +32,7 @@ await run({
   ],
   injectImports: [
     {
-      imports: ["Buffer", "process"],
+      imports: ["process"],
       from: "src/globals.deno.ts"
     }
   ]
@@ -64,7 +64,7 @@ await run({
       ],
       injectImports: [
         {
-          imports: ["Buffer", "process", "test", "expect", "jest"],
+          imports: ["process", "test", "expect", "jest"],
           from: "src/globals.deno.ts"
         }
         // {
@@ -113,7 +113,7 @@ await run({
       ]
       // injectImports: [
       //   {
-      //     imports: ["Buffer", "process"],
+      //     imports: ["process"],
       //     from: "src/globals.deno.ts"
       //   }
       // ]
@@ -257,6 +257,12 @@ async function run({
           resolvedImportPath = resolvedImportPath.replace(
             "/adapter.node.ts",
             "/adapter.deno.ts"
+          );
+        }
+        if (resolvedImportPath.endsWith("/adapter.shared.node.ts")) {
+          resolvedImportPath = resolvedImportPath.replace(
+            "/adapter.shared.node.ts",
+            "/adapter.shared.deno.ts"
           );
         }
 
